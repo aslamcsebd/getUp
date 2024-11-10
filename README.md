@@ -36,3 +36,13 @@
 - Create two roles: Admin and Editor.
 - php artisan make:trait Traits/ApiResponse
 - Use Laravel policies or gates to restrict actions based on roles.
+
+
+### 4. Implement a Simple Queue for Email Notifications
+
+- php artisan queue:table (jobs table)
+- php artisan make:job SendWelcomeEmail
+- php artisan make:mail WelcomeEmail
+- resources/views/emails/welcome.blade.php
+- Start the Queue Worker
+    - php artisan queue:work
