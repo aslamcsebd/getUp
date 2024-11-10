@@ -25,4 +25,14 @@
         - customer_id
         - order_date
 
-# Add all table seeder
+### Add all table seeder (done)
+
+### 3. Implement Role-Based Access Control (RBAC)
+
+- Create some table
+    - Permission
+    - Role
+    - RoleUser
+- Create two roles: Admin and Editor.
+- php artisan make:trait Traits/ApiResponse
+- Use Laravel policies or gates to restrict actions based on roles.
