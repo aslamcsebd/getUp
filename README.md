@@ -47,4 +47,4 @@
 - Start the Queue Worker
     - php artisan queue:work
 
-### 7. Optimize a Complex Query with Eloquent
+### 5. Optimize a Complex Query with Eloquent
