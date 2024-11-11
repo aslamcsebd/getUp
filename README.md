@@ -46,3 +46,5 @@
 - resources/views/emails/welcome.blade.php
 - Start the Queue Worker
     - php artisan queue:work
+
+### 7. Optimize a Complex Query with Eloquent

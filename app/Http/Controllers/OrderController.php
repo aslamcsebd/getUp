@@ -13,7 +13,7 @@ class OrderController extends Controller
     {
         // Using Eloquent:
         $topSellingProducts = Product::orderBy('total_sales', 'desc')->limit(5)->get();
-        
+
         // Using Query Builder
         // $topSellingProducts = DB::table('products')->orderBy('total_sales', 'desc')->limit(5)->get();
 
@@ -40,12 +40,25 @@ class OrderController extends Controller
     public function specific_custom_order($customerId)
     {
         $recentCustomerOrders = Order::where('customer_id', $customerId)->orderBy('order_date', 'desc')->limit(5)->get();
-        
+
         return response()->json([
             'status'  => true,
             'message' => 'Customer Top 5 latest order',
             'Total' => $recentCustomerOrders->count(),
             'recentCustomerOrders'   => $recentCustomerOrders
         ], 200);
+    }
+
+    public function grouped_by_product_category()
+    {
+        // Eager load products and group by category within each order
+
+        // Fetch orders with product and category details to prevent N+1 problem
+        $orders = Order::with(['product.category'])->get();
+
+        // Group orders by product category
+        $groupedOrders = $orders->groupBy('product.category.name');
+
+        return response()->json($groupedOrders);
     }
 }

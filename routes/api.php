@@ -17,7 +17,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/total_sales', [OrderController::class, 'total_sales']);
     Route::get('/latest_orders', [OrderController::class, 'latest_orders']);  
     Route::get('/specific_custom_order/{id}', [OrderController::class, 'specific_custom_order']);  
-      
+    
+    Route::get('/grouped_by_product_category', [OrderController::class, 'grouped_by_product_category']);  
+    
     Route::get('/content/manage', [ContentController::class, 'manageContent'])->middleware('can:manage-all-content');
     Route::put('/articles/{id}/update', [ContentController::class, 'updateArticle'])->middleware('can:update-articles');
 });
