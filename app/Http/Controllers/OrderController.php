@@ -51,14 +51,8 @@ class OrderController extends Controller
 
     public function grouped_by_product_category()
     {
-        // Eager load products and group by category within each order
-
-        // Fetch orders with product and category details to prevent N+1 problem
         $orders = Order::with(['product.category'])->get();
-
-        // Group orders by product category
         $groupedOrders = $orders->groupBy('product.category.name');
-
         return response()->json($groupedOrders);
     }
 }

@@ -32,32 +32,21 @@ class AuthController extends Controller
                 ], 401);
             }
 
-            // $user = User::create([
-            //     'name' => $request->name,
-            //     'email' => $request->email,
-            //     'password' => Hash::make($request->password),
-            // ]);
-
-            $userArray = [
-                'name' => 'Example Name',
-                'email' => 'example@example.com',
-                // other user data...
-            ];
-            
-            // Convert array to User instance if necessary
-            $user = new User($userArray);
-
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
           
-
             // Dispatch the email sending job
-            // SendWelcomeEmail::dispatch($user);
+            // php artisan queue:work [for email output]
 
-            Mail::to('aslamhossainctg@gmail.com')->send(new WelcomeEmail($user));
+            SendWelcomeEmail::dispatch($user);
 
             return response()->json([
                 'status' => true,
                 'message' => 'User created successfully',
-                // 'token'   => $user->createToken('api-token')->plainTextToken
+                'token'   => $user->createToken('api-token')->plainTextToken
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
